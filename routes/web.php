@@ -36,4 +36,7 @@ Route::get('/camera/{id}', [CameraController::class, 'show'])
 Route::put('/camera/{id}', [CameraController::class, 'update'])
     ->middleware(['auth']);
 
+Route::delete('/camera/{id}', [CameraController::class, 'destroy'])
+    ->middleware(['auth']);
+
 require __DIR__.'/auth.php';

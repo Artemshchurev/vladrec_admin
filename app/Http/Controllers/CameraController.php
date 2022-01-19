@@ -49,4 +49,11 @@ class CameraController extends Controller
 
         return redirect()->intended(route('camera.show', ['id' => $id]));
     }
+
+    public function destroy(int $id) {
+        Camera::find($id)
+            ->delete();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
 }
