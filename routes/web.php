@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
 Route::get('/dashboard', [CameraController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
