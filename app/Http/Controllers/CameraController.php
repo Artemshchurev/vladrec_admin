@@ -33,6 +33,7 @@ class CameraController extends Controller
             'link' => $request->get('link'),
             'lat' => $request->get('lat'),
             'lng' => $request->get('lng'),
+            'with_support_of' => $request->get('with_support_of'),
         ]);
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -45,6 +46,7 @@ class CameraController extends Controller
                 'link' => $request->get('link'),
                 'lat' => $request->get('lat'),
                 'lng' => $request->get('lng'),
+                'with_support_of' => $request->get('with_support_of'),
             ]);
 
         return redirect()->intended(route('camera.show', ['id' => $id]));

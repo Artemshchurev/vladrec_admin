@@ -38,6 +38,11 @@
                                                         <label for="lng" class="block text-sm font-medium text-gray-700">Долгота</label>
                                                         <input required type="text" name="lng" id="lng" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
+                                                    <div class="col-span-6 sm:col-span-3"></div>
+                                                    <div class="col-span-6 sm:col-span-3">
+                                                        <label for="with_support_of" class="block text-sm font-medium text-gray-700">При поддержке</label>
+                                                        <input type="text" name="with_support_of" id="with_support_of" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="px-4 py-3 bg-gray-50 text-left sm:px-6">
