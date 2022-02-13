@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/camera', [App\Http\Controllers\Api\CameraController::class, 'index']);
 
+Route::get('/demo-barrier/open', [App\Http\Controllers\Api\DemoBarriersController::class, 'open']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
