@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BarriersController;
 use App\Http\Controllers\CameraController;
+use App\Http\Controllers\DemoBarriersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,17 @@ Route::get('/privacy', function () {
 Route::get('/dashboard', [CameraController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
+
+Route::get('/barriers', [BarriersController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('barriers');
+
+Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('demo-barriers.show');
+
+Route::put('/demo-barriers/{id}', [DemoBarriersController::class, 'update'])
+    ->middleware(['auth']);
 
 Route::get('/camera/create', [CameraController::class, 'create'])
     ->middleware(['auth'])
