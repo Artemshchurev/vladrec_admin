@@ -8,6 +8,11 @@ use GuzzleHttp\Client;
 
 class DemoBarriersController extends Controller
 {
+    public function index() {
+        $demoBarrier = DemoBarrier::first();
+        return json_decode($demoBarrier);
+    }
+
     public function open() {
         $demoBarrier = DemoBarrier::first();
         $client = new Client();
