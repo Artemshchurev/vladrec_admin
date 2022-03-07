@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/camera', [App\Http\Controllers\Api\CameraController::class, 'index']);
 
+Route::get('/camera/common', [App\Http\Controllers\Api\CameraController::class, 'common']);
+
 Route::get('/demo-barrier', [App\Http\Controllers\Api\DemoBarriersController::class, 'index']);
 
 Route::get('/demo-barrier/open', [App\Http\Controllers\Api\DemoBarriersController::class, 'open']);
