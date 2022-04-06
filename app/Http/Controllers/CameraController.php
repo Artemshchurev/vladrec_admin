@@ -37,7 +37,7 @@ class CameraController extends Controller
             'support_link' => $request->get('support_link'),
         ]);
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->to(RouteServiceProvider::HOME);
     }
 
     public function update(int $id, Request $request) {
@@ -51,13 +51,13 @@ class CameraController extends Controller
                 'support_link' => $request->get('support_link'),
             ]);
 
-        return redirect()->intended(route('camera.show', ['id' => $id]));
+        return redirect()->to(route('camera.show', ['id' => $id]));
     }
 
     public function destroy(int $id) {
         Camera::find($id)
             ->delete();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->to(RouteServiceProvider::HOME);
     }
 }

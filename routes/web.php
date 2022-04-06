@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarriersController;
 use App\Http\Controllers\CameraController;
 use App\Http\Controllers\DemoBarriersController;
+use App\Http\Controllers\HousesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,18 @@ Route::get('/privacy', function () {
 Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::get('/barriers', [BarriersController::class, 'index'])
         ->name('barriers');
+
+    Route::get('/houses', [HousesController::class, 'index'])
+        ->name('houses');
+
+    Route::get('/houses/create', [HousesController::class, 'create'])
+        ->name('houses.create');
+
+    Route::post('/houses/create', [HousesController::class, 'store']);
+    Route::get('/houses/{id}', [HousesController::class, 'show'])
+        ->name('houses.show');
+    Route::put('/houses/{id}', [HousesController::class, 'update']);
+    Route::delete('/houses/{id}', [HousesController::class, 'destroy']);
 
     Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
         ->name('demo-barriers.show');
