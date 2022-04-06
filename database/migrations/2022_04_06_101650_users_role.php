@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CamerasAddSupportLink extends Migration
+class UsersRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CamerasAddSupportLink extends Migration
      */
     public function up()
     {
-        Schema::table('cameras', function (Blueprint $table) {
-            $table->string('support_link')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+           $table->enum('role', ['god', 'house-admin', 'client']);
         });
     }
 
@@ -25,8 +25,8 @@ class CamerasAddSupportLink extends Migration
      */
     public function down()
     {
-        Schema::table('cameras', function (Blueprint $table) {
-            $table->dropColumn('support_link');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
         });
     }
 }

@@ -24,36 +24,30 @@ Route::get('/privacy', function () {
     return view('privacy');
 });
 
+Route::group(['middleware' => ['auth', 'role:god']], function () {
+    Route::get('/barriers', [BarriersController::class, 'index'])
+        ->name('barriers');
+
+    Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
+        ->name('demo-barriers.show');
+
+    Route::put('/demo-barriers/{id}', [DemoBarriersController::class, 'update']);
+
+    Route::get('/camera/create', [CameraController::class, 'create'])
+        ->name('camera.create');
+
+    Route::post('/camera/create', [CameraController::class, 'store']);
+
+    Route::get('/camera/{id}', [CameraController::class, 'show'])
+        ->name('camera.show');
+
+    Route::put('/camera/{id}', [CameraController::class, 'update']);
+
+    Route::delete('/camera/{id}', [CameraController::class, 'destroy']);
+});
+
 Route::get('/dashboard', [CameraController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
-
-Route::get('/barriers', [BarriersController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('barriers');
-
-Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('demo-barriers.show');
-
-Route::put('/demo-barriers/{id}', [DemoBarriersController::class, 'update'])
-    ->middleware(['auth']);
-
-Route::get('/camera/create', [CameraController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('camera.create');
-
-Route::post('/camera/create', [CameraController::class, 'store'])
-    ->middleware(['auth']);
-
-Route::get('/camera/{id}', [CameraController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('camera.show');
-
-Route::put('/camera/{id}', [CameraController::class, 'update'])
-    ->middleware(['auth']);
-
-Route::delete('/camera/{id}', [CameraController::class, 'destroy'])
-    ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
