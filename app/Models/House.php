@@ -20,4 +20,9 @@ class House extends Model
     {
         return $this->hasMany(Barrier::class);
     }
+
+    public function cameras(): HasMany
+    {
+        return $this->hasMany(Camera::class);
+    }
 }
