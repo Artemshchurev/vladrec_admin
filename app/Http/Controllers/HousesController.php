@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barrier;
 use App\Models\House;
 use Illuminate\Http\Request;
 
@@ -48,5 +49,19 @@ class HousesController extends Controller
             ->delete();
 
         return redirect()->to('houses');
+    }
+
+    public function barrierCreate(int $id) {
+        return view('houses.barrier-create');
+    }
+
+    public function barrierStore(int $id, Request $request) {
+        Barrier::create([
+            'link' => $request->get('link'),
+            'camera_link' => $request->get('camera_link'),
+            'house_id' => $id,
+        ]);
+
+        return redirect()->to(route('houses.show', ['id' => $id]));
     }
 }

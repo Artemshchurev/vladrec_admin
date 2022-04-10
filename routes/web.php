@@ -28,6 +28,9 @@ Route::get('/privacy', function () {
 Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::get('/barriers', [BarriersController::class, 'index'])
         ->name('barriers');
+    Route::get('/barriers/{id}', [BarriersController::class, 'show'])
+        ->name('barriers.show');
+    Route::put('/barriers/{id}', [BarriersController::class, 'update']);
 
     Route::get('/houses', [HousesController::class, 'index'])
         ->name('houses');
@@ -40,6 +43,9 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
         ->name('houses.show');
     Route::put('/houses/{id}', [HousesController::class, 'update']);
     Route::delete('/houses/{id}', [HousesController::class, 'destroy']);
+    Route::get('/house/{id}/barrier-create', [HousesController::class, 'barrierCreate'])
+        ->name('houses.barrier-create');
+    Route::post('/house/{id}/barrier-create', [HousesController::class, 'barrierStore']);
 
     Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
         ->name('demo-barriers.show');
