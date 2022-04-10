@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarriersController;
-use App\Http\Controllers\CameraController;
+use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
 use Illuminate\Support\Facades\Route;
@@ -52,20 +52,20 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
 
     Route::put('/demo-barriers/{id}', [DemoBarriersController::class, 'update']);
 
-    Route::get('/camera/create', [CameraController::class, 'create'])
-        ->name('camera.create');
+    Route::get('/camera/create', [PublicCamerasController::class, 'create'])
+        ->name('public-camera.create');
 
-    Route::post('/camera/create', [CameraController::class, 'store']);
+    Route::post('/camera/create', [PublicCamerasController::class, 'store']);
 
-    Route::get('/camera/{id}', [CameraController::class, 'show'])
-        ->name('camera.show');
+    Route::get('/camera/{id}', [PublicCamerasController::class, 'show'])
+        ->name('public-camera.show');
 
-    Route::put('/camera/{id}', [CameraController::class, 'update']);
+    Route::put('/camera/{id}', [PublicCamerasController::class, 'update']);
 
-    Route::delete('/camera/{id}', [CameraController::class, 'destroy']);
+    Route::delete('/camera/{id}', [PublicCamerasController::class, 'destroy']);
 });
 
-Route::get('/dashboard', [CameraController::class, 'index'])
+Route::get('/dashboard', [PublicCamerasController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 

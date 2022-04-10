@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Камеры
         </h2>
-        <a href="{{ route('camera.create') }}">Добавить</a>
+        <a href="{{ route('public-camera.create') }}">Добавить</a>
     </x-slot>
 
     <div class="py-12">
@@ -26,7 +26,7 @@
                                         @foreach($cameras as $camera)
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <a href="{{ route('camera.show', ['id' => $camera->id]) }}">
+                                                    <a href="{{ route('public-camera.show', ['id' => $camera->id]) }}">
                                                         <div class="flex items-center">
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-gray-900">

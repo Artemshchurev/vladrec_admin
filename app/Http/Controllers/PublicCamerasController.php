@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Camera;
+use App\Models\PublicCamera;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 
-class CameraController extends Controller
+class PublicCamerasController extends Controller
 {
     public function index() {
-        $cameras = Camera::all();
+        $cameras = PublicCamera::all();
 
         return view('dashboard', [
             'cameras' => $cameras
@@ -17,18 +17,18 @@ class CameraController extends Controller
     }
 
     public function create() {
-        return view('camera.create');
+        return view('public-camera.create');
     }
 
     public function show(int $id) {
-        $camera = Camera::find($id);
-        return view('camera.show', [
+        $camera = PublicCamera::find($id);
+        return view('public-camera.show', [
             'camera' => $camera,
         ]);
     }
 
     public function store(Request $request) {
-        Camera::create([
+        PublicCamera::create([
             'name' => $request->get('name'),
             'link' => $request->get('link'),
             'lat' => $request->get('lat'),
@@ -41,7 +41,7 @@ class CameraController extends Controller
     }
 
     public function update(int $id, Request $request) {
-        Camera::where('id', $id)
+        PublicCamera::where('id', $id)
             ->update([
                 'name' => $request->get('name'),
                 'link' => $request->get('link'),
@@ -51,11 +51,11 @@ class CameraController extends Controller
                 'support_link' => $request->get('support_link'),
             ]);
 
-        return redirect()->to(route('camera.show', ['id' => $id]));
+        return redirect()->to(route('public-camera.show', ['id' => $id]));
     }
 
     public function destroy(int $id) {
-        Camera::find($id)
+        PublicCamera::find($id)
             ->delete();
 
         return redirect()->to(RouteServiceProvider::HOME);
