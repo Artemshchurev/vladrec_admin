@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barrier;
+use App\Models\Camera;
 use App\Models\DemoBarrier;
 use Illuminate\Http\Request;
 
@@ -34,5 +35,13 @@ class BarriersController extends Controller
         ]);
 
         return redirect()->to(route('houses.show', ['id' => $barrier->house->id]));
+    }
+
+    public function destroy(int $id) {
+        $barrier = Barrier::find($id);
+        $houseId = $barrier->house->id;
+        $barrier->delete();
+
+        return redirect()->to(route('houses.show', ['id' => $houseId]));
     }
 }

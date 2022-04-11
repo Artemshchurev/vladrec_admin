@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarriersController;
+use App\Http\Controllers\CamerasController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
@@ -31,6 +32,7 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::get('/barriers/{id}', [BarriersController::class, 'show'])
         ->name('barriers.show');
     Route::put('/barriers/{id}', [BarriersController::class, 'update']);
+    Route::delete('/barriers/{id}', [BarriersController::class, 'destroy']);
 
     Route::get('/houses', [HousesController::class, 'index'])
         ->name('houses');
@@ -46,23 +48,26 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::get('/house/{id}/barrier-create', [HousesController::class, 'barrierCreate'])
         ->name('houses.barrier-create');
     Route::post('/house/{id}/barrier-create', [HousesController::class, 'barrierStore']);
+    Route::get('/house/{id}/camera-create', [HousesController::class, 'cameraCreate'])
+        ->name('houses.camera-create');
+    Route::post('/house/{id}/camera-create', [HousesController::class, 'cameraStore']);
 
     Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
         ->name('demo-barriers.show');
-
     Route::put('/demo-barriers/{id}', [DemoBarriersController::class, 'update']);
 
-    Route::get('/camera/create', [PublicCamerasController::class, 'create'])
+    Route::get('/public-camera/create', [PublicCamerasController::class, 'create'])
         ->name('public-camera.create');
-
-    Route::post('/camera/create', [PublicCamerasController::class, 'store']);
-
-    Route::get('/camera/{id}', [PublicCamerasController::class, 'show'])
+    Route::post('/public-camera/create', [PublicCamerasController::class, 'store']);
+    Route::get('/public-camera/{id}', [PublicCamerasController::class, 'show'])
         ->name('public-camera.show');
+    Route::put('/public-camera/{id}', [PublicCamerasController::class, 'update']);
+    Route::delete('/public-camera/{id}', [PublicCamerasController::class, 'destroy']);
 
-    Route::put('/camera/{id}', [PublicCamerasController::class, 'update']);
-
-    Route::delete('/camera/{id}', [PublicCamerasController::class, 'destroy']);
+    Route::get('/camera/{id}', [CamerasController::class, 'show'])
+        ->name('cameras.show');
+    Route::put('/camera/{id}', [CamerasController::class, 'update']);
+    Route::delete('/camera/{id}', [CamerasController::class, 'destroy']);
 });
 
 Route::get('/dashboard', [PublicCamerasController::class, 'index'])

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barrier;
+use App\Models\Camera;
 use App\Models\House;
 use Illuminate\Http\Request;
 
@@ -57,8 +58,23 @@ class HousesController extends Controller
 
     public function barrierStore(int $id, Request $request) {
         Barrier::create([
+            'name' => $request->get('name'),
             'link' => $request->get('link'),
             'camera_link' => $request->get('camera_link'),
+            'house_id' => $id,
+        ]);
+
+        return redirect()->to(route('houses.show', ['id' => $id]));
+    }
+
+    public function cameraCreate(int $id) {
+        return view('houses.camera-create');
+    }
+
+    public function cameraStore(int $id, Request $request) {
+        Camera::create([
+            'name' => $request->get('name'),
+            'link' => $request->get('link'),
             'house_id' => $id,
         ]);
 
