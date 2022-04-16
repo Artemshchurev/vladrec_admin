@@ -5,6 +5,7 @@ use App\Http\Controllers\CamerasController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,9 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::get('/house/{id}/camera-create', [HousesController::class, 'cameraCreate'])
         ->name('houses.camera-create');
     Route::post('/house/{id}/camera-create', [HousesController::class, 'cameraStore']);
+    Route::get('/house/{id}/user-create', [HousesController::class, 'userCreate'])
+        ->name('houses.user-create');
+    Route::post('/house/{id}/user-create', [HousesController::class, 'userStore']);
 
     Route::get('/demo-barriers/{id}', [DemoBarriersController::class, 'show'])
         ->name('demo-barriers.show');
@@ -68,6 +72,10 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
         ->name('cameras.show');
     Route::put('/camera/{id}', [CamerasController::class, 'update']);
     Route::delete('/camera/{id}', [CamerasController::class, 'destroy']);
+
+    Route::get('/users/{id}', [UsersController::class, 'show'])
+        ->name('users.show');
+    Route::put('/users/{id}', [UsersController::class, 'update']);
 });
 
 Route::get('/dashboard', [PublicCamerasController::class, 'index'])

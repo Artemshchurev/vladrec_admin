@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Barrier;
 use App\Models\Camera;
 use App\Models\House;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class HousesController extends Controller
 {
@@ -77,6 +80,24 @@ class HousesController extends Controller
             'link' => $request->get('link'),
             'house_id' => $id,
         ]);
+
+        return redirect()->to(route('houses.show', ['id' => $id]));
+    }
+
+    public function userCreate(int $id, Request $request) {
+        return view('houses.user-create');
+    }
+
+    public function userStore(int $id, Request $request) {
+        $user = User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make(Str::random()),
+            'phone' => $request->get('phone'),
+            'role' => 'client',
+        ]);
+        $house = House::find($id);
+        $house->users()->attach($user->id);
 
         return redirect()->to(route('houses.show', ['id' => $id]));
     }

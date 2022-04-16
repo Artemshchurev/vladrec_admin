@@ -41,36 +41,59 @@
                                         </div>
                                         {{ Form::close() }}
 
-                                        <a href="{{ route('houses.barrier-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                            Добавить шлагбаум
-                                        </a>
-                                        @if ($house->barriers)
-                                            <div class="px-6 py-6">
-                                                Шлагбаумы:
-                                                @foreach($house->barriers as $barrier)
-                                                    <div>
-                                                        <a href="{{ route('barriers.show', ['id' => $barrier->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                            {{ $barrier->name }}
-                                                        </a>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                        <a href="{{ route('houses.camera-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                            Добавить камеру
-                                        </a>
-                                        @if ($house->cameras)
-                                            <div class="px-6 py-6">
-                                                Камеры:
-                                                @foreach($house->cameras as $camera)
-                                                    <div>
-                                                        <a href="{{ route('cameras.show', ['id' => $camera->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                            {{ $camera->name }}
-                                                        </a>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        @endif
+                                        <div>
+                                            <a href="{{ route('houses.user-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                Добавить жителя
+                                            </a>
+                                            @if ($house->users->isNotEmpty())
+                                                <div class="px-6 py-6">
+                                                    Жители:
+                                                    @foreach($house->users as $user)
+                                                        <div>
+                                                            <a href="{{ route('users.show', ['id' => $user->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                                {{ $user->name }}
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+
+
+                                        <div>
+                                            <a href="{{ route('houses.barrier-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                Добавить шлагбаум
+                                            </a>
+                                            @if ($house->barriers->isNotEmpty())
+                                                <div class="px-6 py-6">
+                                                    Шлагбаумы:
+                                                    @foreach($house->barriers as $barrier)
+                                                        <div>
+                                                            <a href="{{ route('barriers.show', ['id' => $barrier->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                                {{ $barrier->name }}
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('houses.camera-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                Добавить камеру
+                                            </a>
+                                            @if ($house->cameras->isNotEmpty())
+                                                <div class="px-6 py-6">
+                                                    Камеры:
+                                                    @foreach($house->cameras as $camera)
+                                                        <div>
+                                                            <a href="{{ route('cameras.show', ['id' => $camera->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                                                {{ $camera->name }}
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
