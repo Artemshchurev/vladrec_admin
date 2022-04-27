@@ -6,6 +6,7 @@ use App\Http\Controllers\HouseApplicationsController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,8 +75,6 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::put('/camera/{id}', [CamerasController::class, 'update']);
     Route::delete('/camera/{id}', [CamerasController::class, 'destroy']);
 
-    Route::get('/users/{id}', [UsersController::class, 'show'])
-        ->name('users.show');
     Route::put('/users/{id}', [UsersController::class, 'update']);
 });
 
@@ -92,6 +91,12 @@ Route::group(['middleware' => ['auth', 'role:house-admin']], function () {
 
     Route::put('/house-applications', [HouseApplicationsController::class, 'approve']);
     Route::delete('/house-applications', [HouseApplicationsController::class, 'refuse']);
+
+    Route::get('/statistic', [StatisticsController::class, 'index'])
+        ->name('statistic');
+
+    Route::get('/users/{id}', [UsersController::class, 'show'])
+        ->name('users.show');
 });
 
 

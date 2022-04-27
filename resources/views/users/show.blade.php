@@ -21,25 +21,27 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="name" class="block text-sm font-medium text-gray-700">Имя</label>
-                                                        <input required value="{{ $user->name }}" type="text" name="name" id="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $user->name }}" type="text" name="name" id="name" {{ auth()->user()->isHouseAdmin() ? 'disabled' : '' }} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3"></div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                                        <input required value="{{ $user->email }}" type="text" name="email" id="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $user->email }}" type="text" name="email" id="email" {{ auth()->user()->isHouseAdmin() ? 'disabled' : '' }} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3"></div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="phone" class="block text-sm font-medium text-gray-700">Телефон</label>
-                                                        <input required value="{{ $user->phone }}" type="text" name="phone" id="phone" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $user->phone }}" type="text" name="phone" id="phone" {{ auth()->user()->isHouseAdmin() ? 'disabled' : '' }} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="px-4 py-3 text-left sm:px-6">
-                                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                    Сохранить
-                                                </button>
-                                            </div>
+                                            @if (auth()->user()->isGod())
+                                                <div class="px-4 py-3 text-left sm:px-6">
+                                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                        Сохранить
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </div>
                                         {{ Form::close() }}
                                         @if ($user->houses->isNotEmpty())
@@ -54,14 +56,16 @@
                                                 @endforeach
                                             </div>
                                         @endif
-                                        {{ Form::open(array('method' => 'POST', 'class' => 'col-md-12', 'autocomplete' => 'off')) }}
-                                        {{ method_field('DELETE') }}
-                                        <div class="px-4 py-3 text-left sm:px-6">
-                                            <button style="background-color: red;" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                Удалить
-                                            </button>
-                                        </div>
-                                        {{ Form::close() }}
+                                        @if (auth()->user()->isGod())
+                                            {{ Form::open(array('method' => 'POST', 'class' => 'col-md-12', 'autocomplete' => 'off')) }}
+                                            {{ method_field('DELETE') }}
+                                            <div class="px-4 py-3 text-left sm:px-6">
+                                                <button style="background-color: red;" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                    Удалить
+                                                </button>
+                                            </div>
+                                            {{ Form::close() }}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
