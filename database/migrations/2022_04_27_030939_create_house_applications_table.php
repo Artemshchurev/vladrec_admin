@@ -20,7 +20,7 @@ class CreateHouseApplicationsTable extends Migration
             $table->timestamps();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(House::class);
-            $table->boolean('is_approved');
+            $table->boolean('is_approved')->default(0);
         });
     }
 

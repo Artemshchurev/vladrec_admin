@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarriersController;
 use App\Http\Controllers\CamerasController;
+use App\Http\Controllers\HouseApplicationsController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
@@ -78,8 +79,20 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::put('/users/{id}', [UsersController::class, 'update']);
 });
 
-Route::get('/dashboard', [PublicCamerasController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('dashboard');
+Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {
+    Route::get('/dashboard', [PublicCamerasController::class, 'index'])
+        ->name('dashboard');
+    Route::get('/houses/{id}', [HousesController::class, 'show'])
+        ->name('houses.show');
+});
+
+Route::group(['middleware' => ['auth', 'role:house-admin']], function () {
+    Route::get('/house-applications', [HouseApplicationsController::class, 'index'])
+        ->name('house-applications');
+
+    Route::put('/house-applications', [HouseApplicationsController::class, 'approve']);
+    Route::delete('/house-applications', [HouseApplicationsController::class, 'refuse']);
+});
+
 
 require __DIR__.'/auth.php';

@@ -9,11 +9,21 @@ use Illuminate\Http\Request;
 class PublicCamerasController extends Controller
 {
     public function index() {
-        $cameras = PublicCamera::all();
+        $user = auth()->user();
+        if ($user->isGod()) {
+            $cameras = PublicCamera::all();
 
-        return view('dashboard', [
-            'cameras' => $cameras
-        ]);
+            return view('dashboard', [
+                'cameras' => $cameras
+            ]);
+        } else {
+            $houses = $user
+                ->houses
+                ->where('admin_user_id', $user->adminHouse->id);
+            return view('house-admin.dashboard', [
+                'houses' => $houses,
+            ]);
+        }
     }
 
     public function create() {
