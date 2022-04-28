@@ -83,6 +83,8 @@ Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {
         ->name('dashboard');
     Route::get('/houses/{id}', [HousesController::class, 'show'])
         ->name('houses.show');
+    Route::get('/users/{id}', [UsersController::class, 'show'])
+        ->name('users.show');
 });
 
 Route::group(['middleware' => ['auth', 'role:house-admin']], function () {
@@ -94,9 +96,6 @@ Route::group(['middleware' => ['auth', 'role:house-admin']], function () {
 
     Route::get('/statistic', [StatisticsController::class, 'index'])
         ->name('statistic');
-
-    Route::get('/users/{id}', [UsersController::class, 'show'])
-        ->name('users.show');
 });
 
 
