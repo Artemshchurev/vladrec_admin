@@ -27,6 +27,11 @@
                             Дома
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('special-services')" :active="request()->routeIs('special-services')">
+                            Спец. службы
+                        </x-nav-link>
+                    </div>
                 @else
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('house-applications')" :active="request()->routeIs('house-applications')">

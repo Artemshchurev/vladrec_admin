@@ -6,6 +6,7 @@ use App\Http\Controllers\HouseApplicationsController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
+use App\Http\Controllers\SpecialServicesController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,16 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::delete('/camera/{id}', [CamerasController::class, 'destroy']);
 
     Route::put('/users/{id}', [UsersController::class, 'update']);
+
+    Route::get('/special-services', [SpecialServicesController::class, 'index'])
+        ->name('special-services');
+    Route::get('/special-services/create', [SpecialServicesController::class, 'create'])
+        ->name('special-services.create');
+    Route::post('/special-services/create', [SpecialServicesController::class, 'store']);
+    Route::get('/special-services/{id}', [SpecialServicesController::class, 'show'])
+        ->name('special-services.show');
+    Route::put('/special-services/{id}', [SpecialServicesController::class, 'update']);
+    Route::delete('/special-services/{id}', [SpecialServicesController::class, 'destroy']);
 });
 
 Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {
