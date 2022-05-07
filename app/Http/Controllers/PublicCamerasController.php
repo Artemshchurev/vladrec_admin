@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\House;
 use App\Models\PublicCamera;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -16,11 +17,16 @@ class PublicCamerasController extends Controller
             return view('dashboard', [
                 'cameras' => $cameras
             ]);
-        } else {
+        } else if ($user->isHouseAdmin()) {
             $houses = $user
                 ->houses
                 ->where('admin_user_id', $user->adminHouse->id);
             return view('house-admin.dashboard', [
+                'houses' => $houses,
+            ]);
+        } else if ($user->isSpecialService()) {
+            $houses = House::all();
+            return view('special-service.dashboard', [
                 'houses' => $houses,
             ]);
         }

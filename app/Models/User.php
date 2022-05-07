@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->role === 'house-admin';
     }
 
+    public function isSpecialService(): bool {
+        return $this->role === 'special-service';
+    }
+
     public function houses(): BelongsToMany
     {
         return $this->belongsToMany(House::class, 'house_user');

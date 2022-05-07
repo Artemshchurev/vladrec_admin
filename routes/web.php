@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarriersController;
 use App\Http\Controllers\CamerasController;
 use App\Http\Controllers\HouseApplicationsController;
+use App\Http\Controllers\HouseDevicesController;
 use App\Http\Controllers\PublicCamerasController;
 use App\Http\Controllers\DemoBarriersController;
 use App\Http\Controllers\HousesController;
@@ -89,9 +90,17 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
     Route::delete('/special-services/{id}', [SpecialServicesController::class, 'destroy']);
 });
 
-Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {
+Route::group(['middleware' => ['auth', 'role:god|house-admin|special-service']], function () {
     Route::get('/dashboard', [PublicCamerasController::class, 'index'])
         ->name('dashboard');
+});
+
+Route::group(['middleware' => ['auth', 'role:special-service']], function () {
+    Route::get('/house-devices/{id}', [HouseDevicesController::class, 'index'])
+        ->name('house-device');
+});
+
+Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {
     Route::get('/houses/{id}', [HousesController::class, 'show'])
         ->name('houses.show');
     Route::get('/users/{id}', [UsersController::class, 'show'])

@@ -15,7 +15,7 @@
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                 <div class="mt-5 grid grid-cols-2 gap-4">
                                     <div class="px-4 py-5 bg-white sm:p-6">
-                                        <iframe width="500px" height="280px" allowfullscreen src="{{ str_replace('mpegts', 'embed.html', $barrier->link) }}?autoplay=true"></iframe>
+                                        <iframe width="500px" height="280px" allowfullscreen src="{{ str_replace('mpegts', 'embed.html', $barrier->camera_link) }}?autoplay=true"></iframe>
                                     </div>
                                     <div class="px-4 py-5 bg-white sm:p-6">
                                         {{ Form::open(array('method' => 'PUT', 'class' => 'col-md-12', 'autocomplete' => 'off')) }}

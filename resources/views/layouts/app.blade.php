@@ -15,6 +15,11 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        @if (auth()->user()->isSpecialService())
+            <script>
+                window.localStorage.setItem('api-token', '{{ auth()->user()->tokens->where('name', 'admin-panel')->first()->token }}');
+            </script>
+        @endif
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

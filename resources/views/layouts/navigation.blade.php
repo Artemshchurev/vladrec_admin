@@ -32,7 +32,7 @@
                             Спец. службы
                         </x-nav-link>
                     </div>
-                @else
+                @elseif (auth()->user()->isHouseAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('house-applications')" :active="request()->routeIs('house-applications')">
                             Заявки
