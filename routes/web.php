@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\BarriersController;
 use App\Http\Controllers\CamerasController;
+use App\Http\Controllers\God\DemoBarriersController;
+use App\Http\Controllers\God\HouseDevicesController;
+use App\Http\Controllers\God\HousesController;
 use App\Http\Controllers\HouseApplicationsController;
-use App\Http\Controllers\HouseDevicesController;
 use App\Http\Controllers\PublicCamerasController;
-use App\Http\Controllers\DemoBarriersController;
-use App\Http\Controllers\HousesController;
 use App\Http\Controllers\SpecialServicesController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
@@ -32,12 +31,13 @@ Route::get('/privacy', function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:god']], function () {
-    Route::get('/barriers', [BarriersController::class, 'index'])
-        ->name('barriers');
-    Route::get('/barriers/{id}', [BarriersController::class, 'show'])
-        ->name('barriers.show');
-    Route::put('/barriers/{id}', [BarriersController::class, 'update']);
-    Route::delete('/barriers/{id}', [BarriersController::class, 'destroy']);
+    Route::get('/demo-barriers', [DemoBarriersController::class, 'index'])
+        ->name('demo-barriers');
+
+    Route::get('/house-devices/{id}', [HouseDevicesController::class, 'show'])
+        ->name('house-devices.show');
+    Route::put('/house-devices/{id}', [HouseDevicesController::class, 'update']);
+    Route::delete('/house-devices/{id}', [HouseDevicesController::class, 'destroy']);
 
     Route::get('/houses', [HousesController::class, 'index'])
         ->name('houses');
@@ -50,9 +50,9 @@ Route::group(['middleware' => ['auth', 'role:god']], function () {
         ->name('houses.show');
     Route::put('/houses/{id}', [HousesController::class, 'update']);
     Route::delete('/houses/{id}', [HousesController::class, 'destroy']);
-    Route::get('/house/{id}/barrier-create', [HousesController::class, 'barrierCreate'])
-        ->name('houses.barrier-create');
-    Route::post('/house/{id}/barrier-create', [HousesController::class, 'barrierStore']);
+    Route::get('/house/{id}/house-device-create', [HousesController::class, 'houseDeviceCreate'])
+        ->name('houses.house-device-create');
+    Route::post('/house/{id}/barrier-create', [HousesController::class, 'houseDeviceStore']);
     Route::get('/house/{id}/camera-create', [HousesController::class, 'cameraCreate'])
         ->name('houses.camera-create');
     Route::post('/house/{id}/camera-create', [HousesController::class, 'cameraStore']);
@@ -96,8 +96,8 @@ Route::group(['middleware' => ['auth', 'role:god|house-admin|special-service']],
 });
 
 Route::group(['middleware' => ['auth', 'role:special-service']], function () {
-    Route::get('/house-devices/{id}', [HouseDevicesController::class, 'index'])
-        ->name('house-device');
+    Route::get('/special-services/house-devices/{id}', [\App\Http\Controllers\SpecialServices\HouseDevicesController::class, 'index'])
+        ->name('special-services.house-device');
 });
 
 Route::group(['middleware' => ['auth', 'role:god|house-admin']], function () {

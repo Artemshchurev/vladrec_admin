@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
-class Barrier extends Model
+class HouseDevice extends Model
 {
     use HasFactory;
 

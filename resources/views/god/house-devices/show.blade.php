@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Шлагбаум {{ $barrier->name }}
+            {{ $device->type === 'barrier' ? 'Шлагбаум' : 'Дверь' }} {{ $device->name }}
         </h2>
     </x-slot>
 
@@ -15,7 +15,7 @@
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                 <div class="mt-5 grid grid-cols-2 gap-4">
                                     <div class="px-4 py-5 bg-white sm:p-6">
-                                        <iframe width="500px" height="280px" allowfullscreen src="{{ str_replace('mpegts', 'embed.html', $barrier->camera_link) }}?autoplay=true"></iframe>
+                                        <iframe width="500px" height="280px" allowfullscreen src="{{ str_replace('mpegts', 'embed.html', $device->camera_link) }}?autoplay=true"></iframe>
                                     </div>
                                     <div class="px-4 py-5 bg-white sm:p-6">
                                         {{ Form::open(array('method' => 'PUT', 'class' => 'col-md-12', 'autocomplete' => 'off')) }}
@@ -24,17 +24,17 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="name" class="block text-sm font-medium text-gray-700">Название</label>
-                                                        <input required value="{{ $barrier->name }}" type="text" name="name" id="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $device->name }}" type="text" name="name" id="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3"></div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="link" class="block text-sm font-medium text-gray-700">Ссылка на открытие</label>
-                                                        <input required value="{{ $barrier->link }}" type="text" name="link" id="link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $device->link }}" type="text" name="link" id="link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3"></div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="camera_link" class="block text-sm font-medium text-gray-700">Ссылка на камеру</label>
-                                                        <input required value="{{ $barrier->camera_link }}" type="text" name="camera_link" id="camera_link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input required value="{{ $device->camera_link }}" type="text" name="camera_link" id="camera_link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                 </div>
                                             </div>

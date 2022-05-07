@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SpecialServices;
 
+use App\Http\Controllers\Controller;
 use App\Models\House;
+use function view;
 
 class HouseDevicesController extends Controller
 {

@@ -8,7 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <!-- This example requires Tailwind CSS v2.0+ -->
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -42,63 +41,6 @@
                                             </div>
                                             {{ Form::close() }}
                                         @endif
-
-                                        <div>
-                                            @if (auth()->user()->isGod())
-                                                <a href="{{ route('houses.user-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                    Добавить жителя
-                                                </a>
-                                            @endif
-                                            @if ($house->users->isNotEmpty())
-                                                <div class="px-6 py-6">
-                                                    Жители:
-                                                    @foreach($house->users as $user)
-                                                        <div>
-                                                            <a href="{{ route('users.show', ['id' => $user->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                                {{ $user->name }}
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        @if (auth()->user()->isGod())
-                                            <div>
-                                                <a href="{{ route('houses.barrier-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                    Добавить шлагбаум
-                                                </a>
-                                                @if ($house->barriers->isNotEmpty())
-                                                    <div class="px-6 py-6">
-                                                        Шлагбаумы:
-                                                        @foreach($house->barriers as $barrier)
-                                                            <div>
-                                                                <a href="{{ route('barriers.show', ['id' => $barrier->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                                    {{ $barrier->name }}
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div>
-                                                <a href="{{ route('houses.camera-create', ['id' => $house->id]) }}" class="px-6 underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                    Добавить камеру
-                                                </a>
-                                                @if ($house->cameras->isNotEmpty())
-                                                    <div class="px-6 py-6">
-                                                        Камеры:
-                                                        @foreach($house->cameras as $camera)
-                                                            <div>
-                                                                <a href="{{ route('cameras.show', ['id' => $camera->id]) }}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                                                                    {{ $camera->name }}
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -108,4 +50,151 @@
             </div>
         </div>
     </div>
+
+    @if (auth()->user()->isGod() && $house->devices->isNotEmpty())
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <h2 class="font-medium leading-tight text-4xl mt-0 mb-2">Устройства</h2>
+                <a href="{{ route('houses.house-device-create', ['id' => $house->id]) }}">
+                    <button class="mb-3 h-10 px-5 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                        Добавить устройство
+                    </button>
+                </a>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex flex-col">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Название
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Тип
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($house->devices as $device)
+                                            <tr class="cursor-pointer" onclick="document.location = '{{ route('house-devices.show', ['id' => $device->id]) }}'">
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $device->name }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $device->type === 'barrier' ? 'Шлагбаум' : 'Дверь' }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if ($house->users->isNotEmpty())
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <h2 class="font-medium leading-tight text-4xl mt-0 mb-2">Жители</h2>
+                @if (auth()->user()->isGod())
+                    <a href="{{ route('houses.user-create', ['id' => $house->id]) }}">
+                        <button class="mb-3 h-10 px-5 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                            Добавить жителя
+                        </button>
+                    </a>
+                @endif
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex flex-col">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Имя
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($house->users as $user)
+                                            <tr class="cursor-pointer" onclick="document.location = '{{ route('users.show', ['id' => $user->id]) }}'">
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $user->name }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if (auth()->user()->isGod() && $house->cameras->isNotEmpty())
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <h2 class="font-medium leading-tight text-4xl mt-0 mb-2">Камеры</h2>
+                <a href="{{ route('houses.camera-create', ['id' => $house->id]) }}">
+                    <button class="mb-3 h-10 px-5 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                        Добавить камеру
+                    </button>
+                </a>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex flex-col">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Название
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($house->cameras as $camera)
+                                            <tr class="cursor-pointer" onclick="document.location = '{{ route('cameras.show', ['id' => $camera->id]) }}'">
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $camera->name }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </x-app-layout>

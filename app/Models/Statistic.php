@@ -12,14 +12,14 @@ class Statistic extends Model
     use HasFactory;
 
     protected $fillable = [
-        'barrier_id',
+        'house_device_id',
         'user_id',
         'photo',
     ];
 
     public function barrier(): BelongsTo
     {
-        return $this->belongsTo(Barrier::class);
+        return $this->belongsTo(HouseDevice::class);
     }
 
     public function user(): BelongsTo

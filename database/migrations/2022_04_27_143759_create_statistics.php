@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Barrier;
+use App\Models\HouseDevice;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +18,7 @@ class CreateStatistics extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(Barrier::class);
+            $table->foreignIdFor(HouseDevice::class);
             $table->foreignIdFor(User::class);
             $table->string('photo');
         });

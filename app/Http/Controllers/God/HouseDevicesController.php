@@ -1,33 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\God;
 
-use App\Models\Barrier;
-use App\Models\Camera;
-use App\Models\DemoBarrier;
+use App\Http\Controllers\Controller;
+use App\Models\HouseDevice;
 use Illuminate\Http\Request;
+use function redirect;
+use function route;
+use function view;
 
-class BarriersController extends Controller
+class HouseDevicesController extends Controller
 {
-    public function index()
-    {
-        $demoBarrier = DemoBarrier::first();
-
-        return view('barriers.index', [
-            'demoBarrier' => $demoBarrier,
-        ]);
-    }
-
     public function show(int $id) {
-        $barrier = Barrier::find($id);
+        $device = HouseDevice::find($id);
 
-        return view('barriers.show', [
-            'barrier' => $barrier,
+        return view('god.house-devices.show', [
+            'device' => $device,
         ]);
     }
 
     public function update(int $id, Request $request) {
-        $barrier = Barrier::find($id);
+        $barrier = HouseDevice::find($id);
         $barrier->update([
             'name' => $request->get('name'),
             'link' => $request->get('link'),
@@ -38,7 +31,7 @@ class BarriersController extends Controller
     }
 
     public function destroy(int $id) {
-        $barrier = Barrier::find($id);
+        $barrier = HouseDevice::find($id);
         $houseId = $barrier->house->id;
         $barrier->delete();
 

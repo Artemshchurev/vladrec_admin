@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Добавить шлагбаум
+            Добавить устройство - {{ $house->address }}
         </h2>
     </x-slot>
 
@@ -23,7 +23,7 @@
                                                     <input required type="text" name="name" id="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3"></div>
-                                                <div class="col-span-6 sm:col-span-3">
+                                                <div class="col-span-12 sm:col-span-3">
                                                     <label for="link" class="block text-sm font-medium text-gray-700">Ссылка на открытие</label>
                                                     <input required type="text" name="link" id="link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 </div>
@@ -31,6 +31,24 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="camera_link" class="block text-sm font-medium text-gray-700">Ссылка на камеру</label>
                                                     <input required type="text" name="camera_link" id="camera_link" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                </div>
+                                                <div class="col-span-6 sm:col-span-3"></div>
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="type" id="flexRadioDefault1" value="barrier" checked>
+                                                        <label class="form-check-label inline-block text-gray-800" for="flexRadioDefault1">
+                                                            Шлагбаум
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-6 sm:col-span-3"></div>
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="type" id="flexRadioDefault2" value="door">
+                                                        <label class="form-check-label inline-block text-gray-800" for="flexRadioDefault2">
+                                                            Дверь
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

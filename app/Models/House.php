@@ -18,9 +18,9 @@ class House extends Model
         'address',
     ];
 
-    public function barriers(): HasMany
+    public function devices(): HasMany
     {
-        return $this->hasMany(Barrier::class);
+        return $this->hasMany(HouseDevice::class);
     }
 
     public function cameras(): HasMany
