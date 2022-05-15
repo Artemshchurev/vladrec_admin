@@ -8,9 +8,9 @@ class StatisticsController extends Controller
 {
     public function index() {
 
-        $statistics = Statistic::with('barrier')
-            ->join('barriers', 'statistics.barrier_id', '=', 'barriers.id')
-            ->where('barriers.house_id', auth()->user()->adminHouse->id)
+        $statistics = Statistic::with('houseDevice')
+            ->join('house_devices', 'statistics.house_device_id', '=', 'house_devices.id')
+            ->where('house_devices.house_id', auth()->user()->adminHouse->id)
             ->get();
 
         return view('house-admin.statistics', [

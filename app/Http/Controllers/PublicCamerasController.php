@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PublicCamerasController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $user = auth()->user();
         if ($user->isGod()) {
             $cameras = PublicCamera::all();
@@ -25,7 +25,12 @@ class PublicCamerasController extends Controller
                 'houses' => $houses,
             ]);
         } else if ($user->isSpecialService()) {
-            $houses = House::all();
+            if ($search = $request->search) {
+                $houses = House::where('address', 'like', "%${search}%")->get();
+            } else {
+                $houses = House::all();
+            }
+
             return view('special-service.dashboard', [
                 'houses' => $houses,
             ]);

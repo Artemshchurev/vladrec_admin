@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\CameraController;
+use App\Http\Controllers\Api\DemoBarriersController;
+use App\Http\Controllers\Api\HouseDevicesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,14 +16,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/camera', [App\Http\Controllers\Api\CameraController::class, 'index']);
+Route::get('/camera', [CameraController::class, 'index']);
 
-Route::get('/camera/common', [App\Http\Controllers\Api\CameraController::class, 'common']);
+Route::get('/camera/common', [CameraController::class, 'common']);
 
-Route::get('/demo-barrier', [App\Http\Controllers\Api\DemoBarriersController::class, 'index']);
+Route::get('/demo-barrier', [DemoBarriersController::class, 'index']);
 
-Route::get('/demo-barrier/open', [App\Http\Controllers\Api\DemoBarriersController::class, 'open']);
+Route::get('/demo-barrier/open', [DemoBarriersController::class, 'open']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/house-devices/{id}', [HouseDevicesController::class, 'open'])
+    ->middleware('auth:sanctum');

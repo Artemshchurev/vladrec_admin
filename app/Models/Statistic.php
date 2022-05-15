@@ -17,7 +17,7 @@ class Statistic extends Model
         'photo',
     ];
 
-    public function barrier(): BelongsTo
+    public function houseDevice(): BelongsTo
     {
         return $this->belongsTo(HouseDevice::class);
     }
